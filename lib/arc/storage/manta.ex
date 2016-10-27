@@ -21,8 +21,12 @@ defmodule Arc.Storage.Manta do
   end
 
   def delete(definition, version, {file, scope}) do
-    :ok = definition_to_url(definition, version, {file, scope})
-    |> delete_file
+    path = definition_to_url(definition, version, {file, scope})
+
+    case delete_file(path) do
+      :ok -> :ok
+      {:error, "{\"code\":\"ResourceNotFound\"" <> _} -> :ok
+    end
   end
 
   def url(definition, version, file_and_scope, options \\ []) do
@@ -90,8 +94,8 @@ defmodule Arc.Storage.Manta do
   end
 
   def base_headers do
-    now = Timex.DateTime.now
-    |> Timex.format!(@authorization_header_strftime_format, :strftime)
+    now = :calendar.universal_time()
+    |> Calendar.Strftime.strftime!(@authorization_header_strftime_format)
 
     [{"Authorization", authorization_header(now)}, {"date", now}]
   end
