@@ -37,7 +37,8 @@ defmodule Arc.Storage.Manta.Mixfile do
       {:poison,    "~> 1.2 or ~> 2.0" },
       {:calendar,  "~> 0.14.2"},
       {:httpoison, "~> 0.7" },
-      {:mock,      "~> 0.1.1",  only: :test}
+      {:mock,      "~> 0.1.1", only: :test},
+      {:ex_doc,    ">= 0.0.0", only: :dev}
     ]
   end
 end
