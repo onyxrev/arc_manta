@@ -1,7 +1,7 @@
 defmodule Arc.Storage.Manta.Mixfile do
   use Mix.Project
 
-  @version "0.0.1"
+  @version "0.0.2"
 
   def project do
     [app: :arc_manta,
@@ -33,7 +33,7 @@ defmodule Arc.Storage.Manta.Mixfile do
 
   defp deps do
     [
-      {:arc,       "~> 0.5.3"},
+      {:arc,       "~> 0.6.0"},
       {:poison,    "~> 1.2 or ~> 2.0" },
       {:calendar,  "~> 0.14.2"},
       {:httpoison, "~> 0.7" },
