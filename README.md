@@ -10,7 +10,7 @@ Add the latest stable release to your `mix.exs` file:
 ```elixir
 defp deps do
   [
-    arc_manta: "~> 0.0.1"
+    arc_manta: "~> 0.0.2"
   ]
 end
 ```
