@@ -7,6 +7,9 @@ defmodule Arc.Storage.Manta do
   @default_mimetype "application/octet-stream"
   @default_host "us-east.manta.joyent.com"
 
+  # wait up to 30 seconds, which is pretty arbitrary
+  @httpoison_options [recv_timeout: 30000]
+
   def put(definition, version, {file, scope}) do
     path = definition_to_path(definition, version, {file, scope})
     mkdir_p(path)
@@ -43,7 +46,7 @@ defmodule Arc.Storage.Manta do
   defp store_file(fully_qualified_url, data, headers) do
     HTTPoison.start
 
-    HTTPoison.put!(fully_qualified_url, data, headers)
+    HTTPoison.put!(fully_qualified_url, data, headers, @httpoison_options)
     |> httpoison_response_to_status
   end
 
